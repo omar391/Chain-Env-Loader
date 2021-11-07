@@ -6,5 +6,5 @@ import (
 )
 
 func init() {
-	conf.Load("chain_env")
+	conf.Load("chain_env", true)
 }
