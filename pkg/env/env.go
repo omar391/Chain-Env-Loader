@@ -13,8 +13,8 @@ type EnvLoader struct {
 	Overload    bool
 }
 
-func DefaultEnvLoader() EnvLoader {
-	return EnvLoader{
+func DefaultEnvLoader() *EnvLoader {
+	return &EnvLoader{
 		EnvDir:      "./",
 		RootEnvFile: ".env",
 		ChainEnvKey: "chain_env",
