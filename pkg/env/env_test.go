@@ -34,9 +34,16 @@ func TestLoad(t *testing.T) {
 		},
 	}
 
+	el := &EnvLoader{
+		EnvDir:      "../../",
+		RootEnvFile: ".env",
+	}
+
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			err := Load(tt.chain_env_key, tt.overload)
+			el.ChainEnvKey = tt.chain_env_key
+			el.Overload = tt.overload
+			err := el.Load()
 
 			if tt.expectErr {
 				if err == nil {
