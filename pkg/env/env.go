@@ -15,7 +15,7 @@ type EnvLoader struct {
 
 func DefaultEnvLoader() EnvLoader {
 	return EnvLoader{
-		EnvDir:      ".",
+		EnvDir:      "./",
 		RootEnvFile: ".env",
 		ChainEnvKey: "chain_env",
 		Overload:    true,
