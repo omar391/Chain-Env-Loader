@@ -3,20 +3,35 @@ package env
 import (
 	"os"
 	"strconv"
+	"strings"
 )
 
 func GetEnvOrStr(key, fallback string) string {
-	value := os.Getenv(key)
-	if len(value) == 0 {
+	val, ok := os.LookupEnv(key)
+	if !ok {
 		return fallback
 	}
-	return value
+	return val
 }
 
-func GetEnvOrInt(key, fallback string) int {
-	val, err := strconv.Atoi(GetEnvOrStr(key, fallback))
-	if err != nil {
-		return 0
+func GetEnvOrInt(key string, fallback int) int {
+	val, ok := os.LookupEnv(key)
+	if !ok || val == "" {
+		return fallback
 	}
-	return val
+
+	if v, err := strconv.Atoi(val); err == nil {
+		return v
+	}
+
+	return fallback
+}
+
+func GetEnvOrBool(key string, fallback bool) bool {
+	val, ok := os.LookupEnv(key)
+	if !ok || val == "" {
+		return fallback
+	}
+
+	return strings.ToLower(val) == "true"
 }
